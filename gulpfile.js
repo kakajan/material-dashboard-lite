@@ -43,11 +43,12 @@ gulp.task('serve', ['default', 'watch'], function () {
 });
 
 gulp.task('scss', function () {
-    return gulp.src('./src/application.scss')
+    return gulp.src(['./src/application.scss', './src/rtl.scss'])
         .pipe(plumber({errorHandler: onError}))
         .pipe(sass())
         .pipe(gulp.dest('./dist/css'));
 });
+
 
 gulp.task('babel', ['scss'], function () {
     return gulp.src('src/**/*.js')
@@ -73,7 +74,7 @@ gulp.task('default', ['cleanDist', 'jshint', 'babel', 'copyJsLib', 'copyCssLib']
         .pipe(gulp.dest('dist/images'));
     gulp.src('src/**/*.html')
         .pipe(gulp.dest('dist/'))
-        .pipe(inject(gulp.src(['dist/js/**/*.js', 'dist/css/lib/*.css', 'dist/css/*.css'], {read: false}), {relative: true}))
+        .pipe(inject(gulp.src(['dist/js/**/*.js', 'dist/css/lib/*.css'], {read: false}), {relative: true}))
         .pipe(gulp.dest('dist/'));
 });
 
@@ -98,6 +99,10 @@ gulp.task('copyMinCssLib', ['cleanDist'], function () {
     return gulp.src(['bower_components/nvd3/build/nv.d3.min.css', 'bower_components/getmdl-select/getmdl-select.min.css'])
         .pipe(gulp.dest('dist/css/lib'));
 });
+gulp.task('copyFonts', ['cleanDist'], function () {
+    return gulp.src(['src/fonts/*'])
+        .pipe(gulp.dest('dist/css/fonts'));
+});
 
 gulp.task('cleanDist', function () {
     return del('dist/**/*');
@@ -113,7 +118,7 @@ gulp.task('minifyJs', ['cleanDist'], function () {
 });
 
 gulp.task('minifyCss', ['cleanDist'], function () {
-    return gulp.src('src/application.scss')
+    return gulp.src(['src/application.scss','src/rtl.scss'])
         .pipe(plumber({errorHandler: onError}))
         .pipe(sass())
         .pipe(minifycss())
@@ -121,7 +126,8 @@ gulp.task('minifyCss', ['cleanDist'], function () {
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('build', ['minifyJs', 'minifyCss', 'copyMinCssLib', 'copyMinJsLib'], function () {
+
+gulp.task('build', ['minifyJs', 'minifyCss', 'copyMinCssLib', 'copyMinJsLib','copyFonts'], function () {
     gulp.src('src/*.html')
         .pipe(gulp.dest('dist/'))
         .pipe(inject(gulp.src(['dist/js/**/*.js', 'dist/css/lib/*.css',

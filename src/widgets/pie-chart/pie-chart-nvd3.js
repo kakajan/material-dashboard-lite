@@ -73,7 +73,13 @@
                     return '';
                   }
                   d3.selectAll('.nvtooltip').classed('mdl-tooltip', true);
-                  return d.data.y + ' hours';
+                  if  (document.documentElement.lang=="fa") {
+                      return d.data.y + ' ساعت';
+                  }
+                  if (document.documentElement.lang=="en")
+                  {
+                      return d.data.y + ' hours';
+                  }
                 });
 
     var container = d3.select('.pie-chart__container')
@@ -91,7 +97,13 @@
         if (data[i].y < data[i].end) {
           data[i].y++;
           data[data.length - 1].y--;
+            if  (document.documentElement.lang=="fa") {
+          pieChart.title((h + 1) + ' ساعت');
+               }
+               if  (document.documentElement.lang=="en") {
           pieChart.title((h + 1) + ' hours');
+               }
+
           h++;
         } else {
           i++;

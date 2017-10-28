@@ -3,7 +3,7 @@
 $image_path: '../images';
 
 /* ==========  Color & Themes  ========== */
-$color-primary: 0, 188, 212;
+$color-primary: 76, 98, 209;
 $color-secondary: 255, 82, 82;
 $color-baby-blue: 116, 199, 209;
 $color-cerulean: 80, 150, 215;
@@ -50,13 +50,13 @@ $button-fab-active-color-alt: #f23d3d;
 /* ==========  Layout  ========== */
 
 // Drawer
-$layout-drawer-width: 236px;
+$layout-drawer-width: 250px;
 $layout-drawer-bg-color: #202020;
 $layout-nav-color: #202020;
 $layout-drawer-navigation-link-active-background: unquote("rgba(#{$color-black}, 0.25)");
 $layout-drawer-navigation-link-active-color: unquote("rgb(#{$color-primary})");
-$layout-nav-color: unquote("rgba(#{$color-black}, 0.25)");
-$layout-drawer-navigation-link-icon-color: unquote("rgba(#{$color-white}, 0.56)");
+$layout-nav-color: unquote("rgba(#{$color-black}, 0.10)");
+$layout-drawer-navigation-link-icon-color: unquote("rgba(#{$color-white}, 1)");
 $layout-drawer-header-color: unquote("rgb(#{$color-white})");
 $layout-drawer-header-bg-color: unquote("rgba(#{$color-black},0.85)");
 
